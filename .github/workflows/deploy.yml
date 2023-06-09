@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  republish-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts from last environment
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: cicd-test.yml
+          workflow_conclusion: success
+          branch: main
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: ./
+
+  display:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+      
+      - name: Display artifacts
+        run: ls -la
+      
+      - name: Display artifact
+        run: cat ./artifacts/datetime.txt
