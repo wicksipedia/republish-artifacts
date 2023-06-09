@@ -16,7 +16,6 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: artifacts
           path: ./artifact/
 
   display:
@@ -29,4 +28,4 @@ jobs:
         run: ls -la
       
       - name: Display artifact
-        run: cat ./artifacts/datetime.txt
+        run: cat ./artifact/datetime.txt
